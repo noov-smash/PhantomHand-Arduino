@@ -1,1 +1,1 @@
-# masterhand-arduino
+# PhantomHand-arduino
