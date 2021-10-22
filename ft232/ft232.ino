@@ -15,10 +15,10 @@ void setup() {
 
   Serial1.begin(115200);
   byteIndex = 0;
-  leftX = 127;
-  leftY = 127;
-  rightX = 127;
-  rightY = 127;
+  leftX = 128;
+  leftY = 128;
+  rightX = 128;
+  rightY = 128;
   pushButton(Button::PLUS, 500, 5);
 }
 
