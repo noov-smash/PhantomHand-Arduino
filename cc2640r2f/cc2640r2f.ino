@@ -101,6 +101,14 @@ void setControllerStates(byte data[byteMax]) {
     if(data[1] == 1) SwitchControlLibrary().pressButton(Button::PLUS);
     else SwitchControlLibrary().releaseButton(Button::PLUS);
   }
+  else if (data[0] == 10) {
+    if(data[1] == 1) SwitchControlLibrary().pressButton(Button::LCLICK);
+    else SwitchControlLibrary().releaseButton(Button::LCLICK);
+  }
+  else if (data[0] == 11) {
+    if(data[1] == 1) SwitchControlLibrary().pressButton(Button::RCLICK);
+    else SwitchControlLibrary().releaseButton(Button::RCLICK);
+  }
   else if (data[0] == 12) {
     if(data[1] == 1) SwitchControlLibrary().pressHatButton(Hat::UP);
     else SwitchControlLibrary().releaseHatButton(Hat::UP);
