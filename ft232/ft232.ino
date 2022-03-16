@@ -19,7 +19,7 @@ void setup() {
   leftY = 128;
   rightX = 128;
   rightY = 128;
-  pushButton(Button::PLUS, 500, 5);
+  pushButton(Button::HOME, 500, 4);
 }
 
 void setControllerStates(byte data[byteMax]) {
