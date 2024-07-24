@@ -7,6 +7,10 @@ int leftX;
 int leftY;
 int rightX;
 int rightY;
+bool IS_HAT_UP_PRESSED = false;
+bool IS_HAT_DOWN_PRESSED = false;
+bool IS_HAT_LEFT_PRESSED = false;
+bool IS_HAT_RIGHT_PRESSED = false;
 
 void setup() {
   
@@ -77,20 +81,20 @@ void setControllerStates(byte data[byteMax]) {
     else SwitchControlLibrary().releaseButton(Button::RCLICK);
   }
   else if (data[0] == 12) {
-    if(data[1] == 1) SwitchControlLibrary().pressHatButton(Hat::UP);
-    else SwitchControlLibrary().releaseHatButton(Hat::UP);
+    if(data[1] == 1) IS_HAT_UP_PRESSED = true;
+    else IS_HAT_UP_PRESSED = false;
   }
   else if (data[0] == 13) {
-    if(data[1] == 1) SwitchControlLibrary().pressHatButton(Hat::DOWN);
-    else SwitchControlLibrary().releaseHatButton(Hat::DOWN);
+    if(data[1] == 1) IS_HAT_DOWN_PRESSED = true;
+    else IS_HAT_DOWN_PRESSED = false;
   }
   else if (data[0] == 14) {
-    if(data[1] == 1) SwitchControlLibrary().pressHatButton(Hat::LEFT);
-    else SwitchControlLibrary().releaseHatButton(Hat::LEFT);
+    if(data[1] == 1) IS_HAT_LEFT_PRESSED = true;
+    else IS_HAT_LEFT_PRESSED = false;
   }
   else if (data[0] == 15) {
-    if(data[1] == 1) SwitchControlLibrary().pressHatButton(Hat::RIGHT);
-    else SwitchControlLibrary().releaseHatButton(Hat::RIGHT);
+    if(data[1] == 1) IS_HAT_RIGHT_PRESSED = true;
+    else IS_HAT_RIGHT_PRESSED = false;
   }
   else if (data[0] == 16) {
     if(data[1] == 1) SwitchControlLibrary().pressButton(Button::HOME);
@@ -116,6 +120,17 @@ void setControllerStates(byte data[byteMax]) {
     rightY = data[1];
     SwitchControlLibrary().moveRightStick(rightX, rightY);
   }
+
+  // Hat Buttons Conrtoll
+  if (IS_HAT_UP_PRESSED && IS_HAT_RIGHT_PRESSED) SwitchControlLibrary().pressHatButton(Hat::UP_RIGHT);
+  else if (IS_HAT_DOWN_PRESSED && IS_HAT_RIGHT_PRESSED) SwitchControlLibrary().pressHatButton(Hat::DOWN_RIGHT);
+  else if (IS_HAT_DOWN_PRESSED && IS_HAT_LEFT_PRESSED) SwitchControlLibrary().pressHatButton(Hat::DOWN_LEFT);
+  else if (IS_HAT_UP_PRESSED && IS_HAT_LEFT_PRESSED) SwitchControlLibrary().pressHatButton(Hat::UP_LEFT);
+  else if (IS_HAT_UP_PRESSED) SwitchControlLibrary().pressHatButton(Hat::UP);
+  else if (IS_HAT_RIGHT_PRESSED) SwitchControlLibrary().pressHatButton(Hat::RIGHT);
+  else if (IS_HAT_DOWN_PRESSED) SwitchControlLibrary().pressHatButton(Hat::DOWN);
+  else if (IS_HAT_LEFT_PRESSED) SwitchControlLibrary().pressHatButton(Hat::LEFT);
+  else SwitchControlLibrary().releaseHatButton(Hat::NEUTRAL);
 }
 
 
